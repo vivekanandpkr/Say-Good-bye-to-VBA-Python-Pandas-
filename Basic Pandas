@@ -1,0 +1,30 @@
+#Basic Python Pandas to consolidate all excel files
+
+import pandas as pd
+
+#File Location
+path = 'D:\\File\\location\\'                                                         
+print('Started')
+
+ #Create Basic dataframe
+df1 = pd.read_excel(path + 'File1.xlsx')                                             
+df2 = pd.read_excel(path + 'File2.xlsx')
+df3 = pd.read_excel(path + 'File3.xlsx')
+df4 = pd.read_excel(path + 'File4.xlsx')
+df5 = pd.read_excel(path + 'File5.xlsx')
+df6 = pd.read_excel(path + 'File6.xlsx')
+df7 = pd.read_excel(path + 'File7.xlsx')
+
+#Create a writer
+writer = pd.ExcelWriter(path + 'Final Output file.xlsx', engine= 'xlsxwriter')
+
+#Combine the dataframes
+df_combined = df1.append(df2).append(df3).append(df4).append(df5)
+df_combined1 = df6.append(df7)
+print("Writing")
+
+#Create the consolidate excel file
+df_combined.to_excel(writer, sheet_name='Google')
+df_combined1.to_excel(writer, sheet_name='Yahoo')
+print('Success')
+writer.save()
